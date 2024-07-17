@@ -9,6 +9,8 @@ from .serializers import CourseSerializer
 from teacher.models import Teacher
 from .serializers import TeacherSerializer
 from rest_framework.response import Response
+from classperiod.models import ClassPeriod
+from .serializers import ClassPeriodSerializer
 
 class StudentListView(APIView):
     def get(self,request):
@@ -32,6 +34,12 @@ class ClassRoomListView(APIView):
     def get(self,request):
         classroom = ClassRoom.objects.all()
         serializer = ClassRoomSerializer(classroom, many=True)
+        return Response(serializer.data)
+    
+class ClassPeriodListView(APIView):
+    def get(self,request):
+        classperiod = ClassPeriod.objects.all()
+        serializer = ClassPeriodSerializer(classperiod, many=True)
         return Response(serializer.data)
     
 
